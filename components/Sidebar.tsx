@@ -13,7 +13,7 @@ interface SidebarProps {
 const files = [
   { name: "about.js", icon: FileCode, path: "/" },
   { name: "skills.js", icon: FileCode, path: "/skills" },
-  { name: "projects.js", icon: FileCode, path: "/work" },
+  { name: "work.js", icon: FileCode, path: "/work" },
   { name: "experience.js", icon: FileCode, path: "/experience" },
   { name: "blog.js", icon: FileCode, path: "/blog" },
   { name: "contact.js", icon: FileCode, path: "/contact" },
