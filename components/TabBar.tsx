@@ -16,7 +16,7 @@ interface TabBarProps {
 const tabs = [
   { name: "about.js", path: "/" },
   { name: "skills.js", path: "/skills" },
-  { name: "projects.js", path: "/projects" },
+  { name: "work.js", path: "/work" },
   { name: "experience.js", path: "/experience" },
   { name: "blog.js", path: "/blog" },
   { name: "contact.js", path: "/contact" },

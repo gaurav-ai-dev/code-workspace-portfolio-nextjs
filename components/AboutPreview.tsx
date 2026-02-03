@@ -112,7 +112,7 @@ export const AboutPreview = () => {
                     <motion.img
                       key={avatarImages[avatarIndex]} // important for animation on change
                       src={avatarImages[avatarIndex]}
-                      alt="Profile"
+                      // alt="Profile"
                       className="w-full h-full object-cover"
                       // initial={{ opacity: 0 }}
                       // animate={{ opacity: 1 }}
