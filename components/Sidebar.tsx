@@ -11,20 +11,24 @@ interface SidebarProps {
 }
 
 const files = [
-  { name: "about.js", icon: FileCode, path: "/" },
-  { name: "skills.js", icon: FileCode, path: "/skills" },
-  { name: "work.js", icon: FileCode, path: "/work" },
-  { name: "experience.js", icon: FileCode, path: "/experience" },
-  { name: "blog.js", icon: FileCode, path: "/blog" },
-  { name: "contact.js", icon: FileCode, path: "/contact" },
+  { name: "about.js", icon: FileCode, path: "/", external: false },
+  { name: "skills.js", icon: FileCode, path: "/skills", external: false },
+  { name: "work.js", icon: FileCode, path: "/work", external: false },
+  { name: "experience.js", icon: FileCode, path: "/experience", external: false },
+  { name: "blog.js", icon: FileCode, path: "/blog", external: true },
+  { name: "contact.js", icon: FileCode, path: "/contact", external: false },
 ];
 
 export const Sidebar = ({ activeFile, isMobileMenuOpen, onCloseMobileMenu }: SidebarProps) => {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
 
-  const handleFileSelect = (path: string) => {
-    router.push(path);
+  const handleFileSelect = (path: string, external: boolean) => {
+    if (external) {
+      window.open(path, '_blank');
+    } else {
+      router.push(path);
+    }
     onCloseMobileMenu?.();
   };
 
@@ -76,7 +80,7 @@ export const Sidebar = ({ activeFile, isMobileMenuOpen, onCloseMobileMenu }: Sid
                 {files.map((file) => (
                   <button
                     key={file.name}
-                    onClick={() => handleFileSelect(file.path)}
+                    onClick={() => handleFileSelect(file.path, file.external)}
                     className={`flex items-center gap-2 text-sm w-full p-1 rounded transition-colors ${activeFile === file.name
                         ? "bg-editor-tabActive text-foreground"
                         : "hover:bg-muted/30 text-white"

@@ -22,9 +22,9 @@ export const metadata: Metadata = {
 
 const BlogPage = () => {
   return (
-    <Layout activeFile="blog.js">
+    // <Layout activeFile="blog.js">
       <BlogPreview />
-    </Layout>
+    // </Layout>
   );
 };
 

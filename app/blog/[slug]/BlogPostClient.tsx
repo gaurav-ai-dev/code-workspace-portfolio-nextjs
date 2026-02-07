@@ -2,11 +2,13 @@
 import { Layout } from "@/components/Layout";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, ArrowLeft, User } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, User, Mail } from "lucide-react";
 import { getPostBySlug } from "@/data/blogPosts";
 import { JSX, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
+import Link from "next/link";
+import { blogPosts } from "@/data/blogPosts";
 
 type Post = {
   title: string;
@@ -18,19 +20,15 @@ type Post = {
   tags: string[];
 };
 
-export default function BlogPostClient ({post, slug}: {post: Post; slug: string})  {
+export default function BlogPostClient({ slug }: { slug: string }) {
   const router = useRouter();
-  const [hasPlayed, setHasPlayed] = useState(false);
+  const post = slug ? getPostBySlug(slug) : undefined;
 
-  useEffect(() => {
-    const played = sessionStorage.getItem(`blogPost-${slug}-played`);
-    if (!played) {
-      sessionStorage.setItem(`blogPost-${slug}-played`, "true");
-      setHasPlayed(false);
-    } else {
-      setHasPlayed(true);
-    }
-  }, [slug]);
+  // Get related posts (same category, excluding current)
+  const relatedPosts = post
+    ? blogPosts.filter(p => p.category === post.category && p.id !== post.id).slice(0, 3)
+    : [];
+
 
   if (!post) {
     return (
@@ -222,107 +220,245 @@ export default function BlogPostClient ({post, slug}: {post: Post; slug: string}
   };
 
   return (
-    <Layout activeFile="blog.js">
-      <motion.div
-        variants={container}
-        initial={hasPlayed ? "show" : "hidden"}
-        animate="show"
-        className="min-h-full p-4 sm:p-8 relative"
-      >
-        <div className="max-w-4xl mx-auto relative z-10">
-          {/* Back button */}
-          <motion.div variants={item} className="mb-8">
-            <button
-              onClick={() => router.push("/blog")}
-              className="flex items-center gap-2 text-white hover:text-primary transition-colors group"
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              Back to Blog
-            </button>
-          </motion.div>
-
-          {/* Header */}
-          <motion.div variants={item} className="mb-8">
-            <div className="flex items-center gap-3 mb-4 flex-wrap">
-              <Badge className="bg-primary/20 text-primary border-primary/30">
-                {post.category}
-              </Badge>
-              <span className="text-sm text-white flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                {post.date}
-              </span>
-              <span className="text-sm text-white flex items-center gap-1">
-                <Clock className="w-4 h-4" />
-                {post.readTime}
-              </span>
+    // <Layout activeFile="blog.js">
+      <div className="min-h-screen bg-white" style={{ fontFamily: "'Inter', sans-serif" }}>
+        {/* Header */}
+        <header className="border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex items-center justify-between">
+              <Link
+                href="/blog"
+                className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Blog
+              </Link>
+              <Link
+                href="/"
+                className="text-lg font-bold text-gray-900 hover:text-gray-600 transition-colors"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Gaurav Garg
+              </Link>
             </div>
+          </div>
+        </header>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-primary via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+        <motion.main
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
+          {/* Hero Section */}
+          <motion.div variants={item} className="border-b border-gray-100">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+              {/* Category & Meta */}
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6">
+                <span className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full font-semibold text-xs uppercase tracking-wide">
+                  {post.category}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4" />
+                  {post.date}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-4 h-4" />
+                  {post.readTime}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h1
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-[1.15]"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
                 {post.title}
-              </span>
-            </h1>
+              </h1>
 
-            <p className="text-lg text-white leading-relaxed mb-6">
-              {post.excerpt}
-            </p>
+              {/* Excerpt */}
+              <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                {post.excerpt}
+              </p>
 
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="secondary"
-                  className="text-sm bg-muted/60 backdrop-blur-sm border border-border/50"
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Author */}
-          <motion.div variants={item} className="mb-8">
-            <div className="glow-card-wrapper">
-              <div className="glow-card-inner p-4 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center">
-                  <User className="w-6 h-6 text-white" />
+              {/* Author */}
+              <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+                  <User className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">Written by Gaurav Garg</p>
-                  <p className="text-sm text-white">Full Stack & AI Developer</p>
+                  <p className="font-semibold text-gray-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    Gaurav Garg
+                  </p>
+                  <p className="text-sm text-gray-500">Full Stack & AI Developer</p>
                 </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Featured Image */}
+          <motion.div variants={item}>
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden shadow-sm">
+                <div className="w-full h-full bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
               </div>
             </div>
           </motion.div>
 
           {/* Content */}
-          <motion.div variants={item}>
-            <div className="glow-card-wrapper">
-              <div className="glow-card-inner p-6 sm:p-8 lg:p-10">
-                <article className="prose prose-invert max-w-none">
-                  {renderContent(post.content)}
-                </article>
+          <motion.article variants={item} className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            {renderContent(post.content)}
+          </motion.article>
+
+          {/* Mid-Content CTA */}
+          <motion.div variants={item} className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 sm:p-10 text-center border border-gray-200">
+              <h3
+                className="text-2xl font-bold text-gray-900 mb-3"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Need a developer for your product?
+              </h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                I help businesses build scalable web applications and bring ideas to life.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/contact"
+                  className="px-8 py-3.5 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors shadow-sm"
+                >
+                  Contact Me
+                </Link>
+                <Link
+                  href="/projects"
+                  className="px-8 py-3.5 border border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-white transition-colors"
+                >
+                  View Projects
+                </Link>
               </div>
             </div>
           </motion.div>
 
-          {/* Navigation */}
-          <motion.div variants={item} className="mt-8">
-            <div className="glow-card-wrapper">
-              <div className="glow-card-inner p-6 text-center">
-                <p className="text-white mb-4">Enjoyed this article?</p>
-                <button
-                  onClick={() => router.push("/blog")}
-                  className="px-6 py-2 bg-primary/20 text-primary border border-primary/30 rounded-lg hover:bg-primary/30 transition-colors"
+          {/* Tags */}
+          <motion.div variants={item} className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-gray-100">
+            <p className="text-sm text-gray-500 mb-4 font-medium">Tagged with:</p>
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-700 font-medium hover:bg-gray-200 transition-colors"
                 >
-                  Read More Articles
-                </button>
-              </div>
+                  {tag}
+                </span>
+              ))}
             </div>
           </motion.div>
-        </div>
-      </motion.div>
-    </Layout>
+
+          {/* Related Posts */}
+          {relatedPosts.length > 0 && (
+            <motion.section variants={item} className="border-t border-gray-100 bg-gray-50">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <h2
+                  className="text-2xl sm:text-3xl font-bold text-gray-900 mb-10 text-center"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Related Articles
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {relatedPosts.map((relatedPost) => (
+                    <Link
+                      key={relatedPost.id}
+                      href={`/blog/${relatedPost.slug}`}
+                      className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
+                    >
+                      {/* Thumbnail */}
+                      <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200">
+                        <div className="w-full h-full bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
+                      </div>
+
+                      <div className="p-6">
+                        <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                          <span className="px-2.5 py-1 bg-gray-100 rounded-full text-gray-600 font-medium">
+                            {relatedPost.category}
+                          </span>
+                          <span>{relatedPost.readTime}</span>
+                        </div>
+                        <h3
+                          className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug"
+                          style={{ fontFamily: "'DM Sans', sans-serif" }}
+                        >
+                          {relatedPost.title}
+                        </h3>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </motion.section>
+          )}
+        </motion.main>
+
+        {/* Footer */}
+        <footer className="border-t border-gray-100 bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <h3
+                  className="font-bold text-gray-900 mb-4"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Gaurav Garg
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Full Stack & AI Developer building products that scale.
+                </p>
+              </div>
+              <div>
+                <h3
+                  className="font-bold text-gray-900 mb-4"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Links
+                </h3>
+                <ul className="space-y-2.5 text-sm">
+                  <li>
+                    <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+                      Portfolio
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/projects" className="text-gray-600 hover:text-gray-900 transition-colors">
+                      Projects
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/blog" className="text-gray-600 hover:text-gray-900 transition-colors">
+                      Blog
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3
+                  className="font-bold text-gray-900 mb-4"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Contact
+                </h3>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center gap-2 text-gray-600">
+                    <Mail className="w-4 h-4" />
+                    contact@gauravgarg.dev
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-500">
+              © {new Date().getFullYear()} Gaurav Garg. All rights reserved.
+            </div>
+          </div>
+        </footer>
+      </div>
+    // </Layout>
   );
 };
 

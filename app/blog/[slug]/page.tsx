@@ -23,5 +23,5 @@ export default async function BlogPostPage({
 
     if (!post) return notFound();
 
-    return <BlogPostClient post={post} slug={slug} />;
+    return <BlogPostClient slug={slug} />;
 }

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   keywords: ["Next.js Developer", "Full Stack Developer", "React Developer", "Web Application Developer", "Freelance Next.js Developer"]
 
-};  
+};
 
 export default function RootLayout({
   children,
