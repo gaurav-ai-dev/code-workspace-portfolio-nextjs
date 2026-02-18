@@ -1,5 +1,4 @@
 "use client";
-import { Layout } from "@/components/LayoutShell";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, ArrowLeft, User, Mail } from "lucide-react";
@@ -32,7 +31,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
 
   if (!post) {
     return (
-      <Layout activeFile="blog.js">
+      // <Layout activeFile="blog.js">
         <div className="min-h-full flex items-center justify-center p-8">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
@@ -45,7 +44,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
             </button>
           </div>
         </div>
-      </Layout>
+      // </Layout>
     );
   }
 

@@ -1,11 +1,10 @@
-import { Layout } from "@/components/LayoutShell";
 import { BlogPreview } from "@/components/BlogPreview";
 
 const BlogPage = () => {
   return (
-    <Layout activeFile="blog.js">
+    // <Layout activeFile="blog.js">
       <BlogPreview />
-    </Layout>
+    // </Layout>
   );
 };
 

@@ -1,4 +1,3 @@
-import { Layout } from "@/components/LayoutShell";
 import { BlogPreview } from "@/components/BlogPreview";
 import { Metadata } from "next";
 
