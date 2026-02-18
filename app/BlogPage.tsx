@@ -1,4 +1,4 @@
-import { Layout } from "@/components/Layout";
+import { Layout } from "@/components/LayoutShell";
 import { BlogPreview } from "@/components/BlogPreview";
 
 const BlogPage = () => {

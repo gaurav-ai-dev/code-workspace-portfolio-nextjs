@@ -1,5 +1,5 @@
 "use client";
-import { Layout } from "@/components/Layout";
+import { Layout } from "@/components/LayoutShell";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, ArrowLeft, User, Mail } from "lucide-react";

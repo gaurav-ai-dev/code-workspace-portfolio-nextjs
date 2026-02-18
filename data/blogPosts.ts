@@ -102,113 +102,113 @@ const virtualizer = useVirtualizer({
 Building for scale is a journey, not a destination. These patterns have served us well, but the React ecosystem continues to evolve with features like Server Components and Concurrent Rendering opening new possibilities.
     `
   },
-  {
-    id: 2,
-    slug: "mongodb-vs-postgresql-when-to-use-which",
-    title: "MongoDB vs PostgreSQL: When to Use Which",
-    date: "Jan 08, 2024",
-    category: "Database",
-    readTime: "6 min read",
-    excerpt: "A practical comparison based on real project experiences. Understanding trade-offs between flexibility and ACID compliance.",
-    tags: ["MongoDB", "PostgreSQL", "Backend"],
-    featured: true,
-    gradient: "from-purple-500/20 to-pink-500/20",
-    content: `
-## The Eternal Debate
+    {
+      id: 2,
+      slug: "mongodb-vs-postgresql-when-to-use-which",
+      title: "MongoDB vs PostgreSQL: When to Use Which",
+      date: "Jan 08, 2024",
+      category: "Database",
+      readTime: "6 min read",
+      excerpt: "A practical comparison based on real project experiences. Understanding trade-offs between flexibility and ACID compliance.",
+      tags: ["MongoDB", "PostgreSQL", "Backend"],
+      featured: true,
+      gradient: "from-purple-500/20 to-pink-500/20",
+      content: `
+  ## The Eternal Debate
 
-Every developer has been in this situation: starting a new project and needing to choose between MongoDB and PostgreSQL. After using both extensively in production, here's my practical guide.
+  Every developer has been in this situation: starting a new project and needing to choose between MongoDB and PostgreSQL. After using both extensively in production, here's my practical guide.
 
-## When MongoDB Shines
+  ## When MongoDB Shines
 
-### 1. Rapidly Evolving Schemas
+  ### 1. Rapidly Evolving Schemas
 
-If your data model is still being figured out, MongoDB's flexibility is invaluable:
+  If your data model is still being figured out, MongoDB's flexibility is invaluable:
 
-\`\`\`javascript
-// Easy to add new fields without migrations
-db.users.insertOne({
-  name: "John",
-  email: "john@example.com",
-  // New field? No problem!
-  preferences: {
-    theme: "dark",
-    notifications: true
-  }
-});
-\`\`\`
+  \`\`\`javascript
+  // Easy to add new fields without migrations
+  db.users.insertOne({
+    name: "John",
+    email: "john@example.com",
+    // New field? No problem!
+    preferences: {
+      theme: "dark",
+      notifications: true
+    }
+  });
+  \`\`\`
 
-### 2. Document-Centric Data
+  ### 2. Document-Centric Data
 
-When your data naturally forms documents (like articles, products with varying attributes, or user profiles), MongoDB's document model is intuitive.
+  When your data naturally forms documents (like articles, products with varying attributes, or user profiles), MongoDB's document model is intuitive.
 
-### 3. Horizontal Scaling Needs
+  ### 3. Horizontal Scaling Needs
 
-MongoDB's sharding capabilities make horizontal scaling more straightforward for read-heavy workloads.
+  MongoDB's sharding capabilities make horizontal scaling more straightforward for read-heavy workloads.
 
-## When PostgreSQL Wins
+  ## When PostgreSQL Wins
 
-### 1. Complex Relationships
+  ### 1. Complex Relationships
 
-When you have highly relational data with complex joins:
+  When you have highly relational data with complex joins:
 
-\`\`\`sql
-SELECT 
-  orders.id,
-  customers.name,
-  products.title,
-  order_items.quantity
-FROM orders
-JOIN customers ON orders.customer_id = customers.id
-JOIN order_items ON orders.id = order_items.order_id
-JOIN products ON order_items.product_id = products.id
-WHERE orders.created_at > NOW() - INTERVAL '30 days';
-\`\`\`
+  \`\`\`sql
+  SELECT 
+    orders.id,
+    customers.name,
+    products.title,
+    order_items.quantity
+  FROM orders
+  JOIN customers ON orders.customer_id = customers.id
+  JOIN order_items ON orders.id = order_items.order_id
+  JOIN products ON order_items.product_id = products.id
+  WHERE orders.created_at > NOW() - INTERVAL '30 days';
+  \`\`\`
 
-### 2. ACID Compliance is Critical
+  ### 2. ACID Compliance is Critical
 
-For financial applications, inventory management, or anywhere data integrity is paramount, PostgreSQL's ACID guarantees are essential.
+  For financial applications, inventory management, or anywhere data integrity is paramount, PostgreSQL's ACID guarantees are essential.
 
-### 3. Advanced Querying
+  ### 3. Advanced Querying
 
-PostgreSQL's support for window functions, CTEs, and full-text search makes complex analytics queries possible without additional tools.
+  PostgreSQL's support for window functions, CTEs, and full-text search makes complex analytics queries possible without additional tools.
 
-## Real-World Scenarios
+  ## Real-World Scenarios
 
-### E-commerce Platform
-**Choice**: PostgreSQL  
-**Reason**: Orders, inventory, and payments require ACID compliance
+  ### E-commerce Platform
+  **Choice**: PostgreSQL  
+  **Reason**: Orders, inventory, and payments require ACID compliance
 
-### Content Management System
-**Choice**: MongoDB  
-**Reason**: Flexible content types with varying fields
+  ### Content Management System
+  **Choice**: MongoDB  
+  **Reason**: Flexible content types with varying fields
 
-### Analytics Dashboard
-**Choice**: PostgreSQL  
-**Reason**: Complex aggregations and time-series queries
+  ### Analytics Dashboard
+  **Choice**: PostgreSQL  
+  **Reason**: Complex aggregations and time-series queries
 
-### Real-time Chat Application
-**Choice**: MongoDB  
-**Reason**: High write throughput, flexible message schemas
+  ### Real-time Chat Application
+  **Choice**: MongoDB  
+  **Reason**: High write throughput, flexible message schemas
 
-## The Hybrid Approach
+  ## The Hybrid Approach
 
-Sometimes the answer is "both." In our latest project, we use:
-- PostgreSQL for user accounts, orders, and payments
-- MongoDB for activity logs, user-generated content, and analytics events
+  Sometimes the answer is "both." In our latest project, we use:
+  - PostgreSQL for user accounts, orders, and payments
+  - MongoDB for activity logs, user-generated content, and analytics events
 
-## Conclusion
+  ## Conclusion
 
-There's no universal winner. The best database is the one that fits your specific use case. Consider:
+  There's no universal winner. The best database is the one that fits your specific use case. Consider:
 
-1. Your data structure and relationships
-2. Consistency requirements
-3. Scaling needs
-4. Team expertise
-5. Ecosystem and tooling
+  1. Your data structure and relationships
+  2. Consistency requirements
+  3. Scaling needs
+  4. Team expertise
+  5. Ecosystem and tooling
 
-Both databases are excellent choices—the key is matching their strengths to your needs.
-    `
-  },
+  Both databases are excellent choices—the key is matching their strengths to your needs.
+      `
+    },
   {
     id: 3,
     slug: "mastering-typescript-generics",

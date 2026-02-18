@@ -1,4 +1,3 @@
-import { Layout } from "@/components/Layout";
 import { ProjectsPreview } from "@/components/ProjectsPreview";
 import { Metadata } from "next";
 
@@ -21,9 +20,9 @@ export const metadata: Metadata = {
 
 const ProjectsPage = () => {
   return (
-    <Layout activeFile="work.js">
+    // <Layout activeFile="work.js">
       <ProjectsPreview />
-    </Layout>
+    // </Layout>
   );
 };
 

@@ -1,4 +1,3 @@
-import { Layout } from "@/components/Layout";
 import { ExperiencePreview } from "@/components/ExperiencePreview";
 import { Metadata } from "next";
 
@@ -20,9 +19,9 @@ export const metadata: Metadata = {
 
 const ExperiencePage = () => {
   return (
-    <Layout activeFile="experience.js">
+    // <Layout activeFile="experience.js">
       <ExperiencePreview />
-    </Layout>
+    // </Layout>
   );
 };
 

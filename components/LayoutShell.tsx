@@ -1,43 +1,47 @@
-"use client"
-import { useState, useEffect, ReactNode } from "react";
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Sidebar } from "@/components/Sidebar";
 import { TabBar } from "@/components/TabBar";
 import { Terminal } from "@/components/Terminal";
 import { Code2, Maximize2, Menu } from "lucide-react";
 
-interface LayoutProps {
-  children: ReactNode;
-  activeFile: string;
-}
+export function LayoutShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
 
-export const Layout = ({ children, activeFile }: LayoutProps) => {
+  // ✅ map route -> active file
+  const activeFile = useMemo(() => {
+    if (pathname === "/") return "home.js";
+    if (pathname.startsWith("/about")) return "about.js";
+    if (pathname.startsWith("/projects")) return "projects.js";
+    if (pathname.startsWith("/experience")) return "experience.js";
+    if (pathname.startsWith("/contact")) return "contact.js";
+    return "home.js";
+  }, [pathname]);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [terminalHeight, setTerminalHeight] = useState(300);
 
-  const toggleTerminal = () => {
-    setIsTerminalOpen(!isTerminalOpen);
-  };
+  const toggleTerminal = () => setIsTerminalOpen((v) => !v);
 
-  // Keyboard shortcut for terminal (Ctrl+` or Cmd+`)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === '`') {
+      if ((e.ctrlKey || e.metaKey) && e.key === "`") {
         e.preventDefault();
         toggleTerminal();
       }
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isTerminalOpen]);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div className="h-screen flex flex-col bg-background text-foreground relative overflow-hidden">
       {/* Top bar */}
       <div className="h-10 bg-secondary/80 backdrop-blur-sm border-b border-border flex items-center justify-between px-4 relative z-10">
         <div className="flex items-center gap-3">
-          {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden hover:bg-muted/30 p-1 rounded transition-colors"
@@ -71,7 +75,6 @@ export const Layout = ({ children, activeFile }: LayoutProps) => {
         </div>
       </div>
 
-      {/* Bottom terminal */}
       <Terminal
         isOpen={isTerminalOpen}
         onToggle={toggleTerminal}
@@ -80,4 +83,4 @@ export const Layout = ({ children, activeFile }: LayoutProps) => {
       />
     </div>
   );
-};
+}

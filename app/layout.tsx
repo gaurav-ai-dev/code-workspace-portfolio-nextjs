@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css"
+import { LayoutShell } from "@/components/LayoutShell";
 
 
 export const metadata: Metadata = {
@@ -28,7 +29,9 @@ export default function RootLayout({
       <body
         className="antialiased"
       >
-        {children}
+        <LayoutShell>
+          {children}
+        </LayoutShell>
       </body>
     </html>
   );

@@ -1,11 +1,10 @@
-import { Layout } from "@/components/Layout";
 import { AboutPreview } from "@/components/AboutPreview";
 
 const AboutPage = () => {
   return (
-    <Layout activeFile="about.js">
+    // <Layout activeFile="about.js">
       <AboutPreview />
-    </Layout>
+    // </Layout>
   );
 };
 
