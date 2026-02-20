@@ -8,62 +8,45 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* VS Code Editor Theme - Dark Mode Only */
-    --background: 0 0% 11.8%;
-    /* #1e1e1e */
-    --foreground: 0 0% 80%;
-    /* #cccccc */
+    /* Theme transition for smooth switching */
+    --theme-transition: 250ms;
+  }
 
+  /* ===== THEME: Dark+ (VS Code Default) ===== */
+  :root,
+  .theme-dark-plus {
+    --background: 0 0% 11.8%;
+    --foreground: 0 0% 80%;
     --card: 0 0% 11.8%;
     --card-foreground: 0 0% 80%;
-
     --popover: 0 0% 14.5%;
     --popover-foreground: 0 0% 80%;
-
     --primary: 207 100% 40%;
-    /* VS Code blue #007acc */
     --primary-foreground: 0 0% 100%;
-
     --secondary: 0 0% 17.6%;
-    /* #2d2d30 */
     --secondary-foreground: 0 0% 80%;
-
     --muted: 0 0% 14.5%;
-    /* #252526 */
     --muted-foreground: 0 0% 53%;
-
     --accent: 207 100% 40%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 0 0% 24%;
-    /* #3e3e42 */
     --input: 0 0% 24%;
     --ring: 207 100% 40%;
-
     --radius: 0rem;
 
-    /* Syntax Highlighting Colors - Enhanced Contrast */
+    /* Syntax Highlighting */
     --syntax-keyword: 290 80% 75%;
-    /* purple-blue keywords */
     --syntax-string: 100 80% 70%;
-    /* bright green strings */
     --syntax-number: 30 90% 70%;
-    /* bright orange numbers */
     --syntax-function: 45 90% 70%;
-    /* bright yellow functions */
     --syntax-comment: 120 15% 55%;
-    /* muted green comments */
     --syntax-operator: 0 0% 80%;
-    /* light gray operators */
     --syntax-property: 200 80% 70%;
-    /* cyan properties */
     --syntax-variable: 187 80% 78%;
-    /* light blue variables */
 
-    /* Editor UI Elements */
+    /* Editor UI */
     --editor-bg: 0 0% 11.8%;
     --sidebar-bg: 0 0% 14.5%;
     --tab-active: 0 0% 11.8%;
@@ -72,10 +55,7 @@ All colors MUST be HSL.
     --terminal-bg: 0 0% 9%;
     --terminal-text: 120 100% 60%;
 
-    /* Transition */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Premium Gradients */
+    /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(207 100% 50%), hsl(270 90% 60%));
     --gradient-secondary: linear-gradient(135deg, hsl(290 80% 60%), hsl(330 70% 55%));
     --gradient-accent: linear-gradient(135deg, hsl(180 80% 50%), hsl(200 80% 55%));
@@ -83,7 +63,7 @@ All colors MUST be HSL.
     --gradient-card: linear-gradient(135deg, hsl(0 0% 14.5%), hsl(0 0% 11.8%));
     --gradient-border: linear-gradient(135deg, hsl(207 100% 50%), hsl(270 90% 60%), hsl(180 80% 50%));
 
-    /* Glassmorphism */
+    /* Glass & Effects */
     --glass-bg: hsl(0 0% 14.5% / 0.6);
     --glass-border: hsl(0 0% 100% / 0.1);
     --glass-premium: hsl(0 0% 18% / 0.7);
@@ -98,23 +78,381 @@ All colors MUST be HSL.
     --glow-accent: 0 0 40px hsl(180 80% 50% / 0.4);
     --glow-hover: 0 0 60px hsl(207 100% 50% / 0.6);
 
-    /* Neon & Cinematic Effects */
+    /* Neon Effects */
     --neon-blue: 0 0 20px hsl(207 100% 50%), 0 0 40px hsl(207 100% 50% / 0.5);
     --neon-purple: 0 0 20px hsl(270 90% 60%), 0 0 40px hsl(270 90% 60% / 0.5);
     --neon-cyan: 0 0 20px hsl(180 80% 50%), 0 0 40px hsl(180 80% 50% / 0.5);
   }
+
+  /* ===== THEME: Light+ ===== */
+  .theme-light-plus {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 207 100% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 207 100% 40%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 80% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 207 100% 40%;
+
+    /* Syntax Highlighting - Light */
+    --syntax-keyword: 290 70% 45%;
+    --syntax-string: 100 60% 35%;
+    --syntax-number: 30 90% 45%;
+    --syntax-function: 45 80% 35%;
+    --syntax-comment: 120 15% 45%;
+    --syntax-operator: 0 0% 30%;
+    --syntax-property: 200 70% 40%;
+    --syntax-variable: 187 70% 40%;
+
+    /* Editor UI - Light */
+    --editor-bg: 0 0% 100%;
+    --sidebar-bg: 0 0% 96%;
+    --tab-active: 0 0% 100%;
+    --tab-inactive: 0 0% 94%;
+    --line-number: 0 0% 60%;
+    --terminal-bg: 0 0% 15%;
+    --terminal-text: 120 100% 40%;
+
+    /* Gradients - Light */
+    --gradient-primary: linear-gradient(135deg, hsl(207 100% 50%), hsl(270 90% 60%));
+    --gradient-glow: linear-gradient(135deg, hsl(207 100% 40% / 0.1), hsl(270 80% 50% / 0.1));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 98%), hsl(0 0% 100%));
+
+    /* Glass - Light */
+    --glass-bg: hsl(0 0% 100% / 0.8);
+    --glass-border: hsl(0 0% 0% / 0.05);
+    --glass-premium: hsl(0 0% 98% / 0.9);
+
+    /* Shadows - Light */
+    --shadow-soft: 0 4px 24px hsl(0 0% 0% / 0.08);
+    --shadow-medium: 0 8px 32px hsl(0 0% 0% / 0.12);
+    --shadow-large: 0 16px 48px hsl(0 0% 0% / 0.15);
+    --glow-primary: 0 0 40px hsl(207 100% 50% / 0.2);
+  }
+
+  /* ===== THEME: GitHub Dark ===== */
+  .theme-github-dark {
+    --background: 215 21% 11%;
+    --foreground: 210 17% 82%;
+    --card: 215 19% 13%;
+    --card-foreground: 210 17% 82%;
+    --popover: 215 19% 15%;
+    --popover-foreground: 210 17% 82%;
+    --primary: 212 92% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 17% 18%;
+    --secondary-foreground: 210 17% 82%;
+    --muted: 215 17% 16%;
+    --muted-foreground: 215 10% 50%;
+    --accent: 212 92% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 14% 20%;
+    --input: 215 14% 20%;
+    --ring: 212 92% 45%;
+
+    /* Syntax - GitHub Dark */
+    --syntax-keyword: 340 82% 72%;
+    --syntax-string: 162 73% 54%;
+    --syntax-number: 212 92% 65%;
+    --syntax-function: 285 60% 72%;
+    --syntax-comment: 215 10% 45%;
+    --syntax-operator: 210 17% 82%;
+    --syntax-property: 212 92% 65%;
+    --syntax-variable: 29 54% 61%;
+
+    /* Editor UI - GitHub */
+    --editor-bg: 215 21% 11%;
+    --sidebar-bg: 215 19% 13%;
+    --tab-active: 215 21% 11%;
+    --tab-inactive: 215 17% 16%;
+    --line-number: 215 10% 40%;
+    --terminal-bg: 215 21% 8%;
+    --terminal-text: 162 73% 54%;
+
+    /* Gradients - GitHub */
+    --gradient-primary: linear-gradient(135deg, hsl(212 92% 45%), hsl(285 60% 55%));
+    --gradient-glow: linear-gradient(135deg, hsl(212 92% 45% / 0.2), hsl(285 60% 55% / 0.2));
+    --gradient-card: linear-gradient(135deg, hsl(215 19% 13%), hsl(215 21% 11%));
+
+    /* Effects - GitHub */
+    --glass-bg: hsl(215 19% 13% / 0.7);
+    --glass-border: hsl(0 0% 100% / 0.08);
+    --glow-primary: 0 0 40px hsl(212 92% 45% / 0.4);
+    --neon-blue: 0 0 20px hsl(212 92% 45%), 0 0 40px hsl(212 92% 45% / 0.5);
+  }
+
+  /* ===== THEME: Monokai Pro ===== */
+  .theme-monokai-pro {
+    --background: 70 8% 15%;
+    --foreground: 60 30% 88%;
+    --card: 70 8% 17%;
+    --card-foreground: 60 30% 88%;
+    --popover: 70 8% 19%;
+    --popover-foreground: 60 30% 88%;
+    --primary: 50 100% 60%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 70 8% 20%;
+    --secondary-foreground: 60 30% 88%;
+    --muted: 70 8% 18%;
+    --muted-foreground: 60 10% 55%;
+    --accent: 50 100% 60%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 70 6% 25%;
+    --input: 70 6% 25%;
+    --ring: 50 100% 60%;
+
+    /* Syntax - Monokai */
+    --syntax-keyword: 340 82% 65%;
+    --syntax-string: 80 75% 55%;
+    --syntax-number: 265 85% 75%;
+    --syntax-function: 190 80% 55%;
+    --syntax-comment: 55 10% 45%;
+    --syntax-operator: 340 82% 65%;
+    --syntax-property: 50 100% 60%;
+    --syntax-variable: 60 30% 88%;
+
+    /* Editor UI - Monokai */
+    --editor-bg: 70 8% 15%;
+    --sidebar-bg: 70 8% 12%;
+    --tab-active: 70 8% 15%;
+    --tab-inactive: 70 8% 18%;
+    --line-number: 60 5% 40%;
+    --terminal-bg: 70 8% 10%;
+    --terminal-text: 80 75% 55%;
+
+    /* Gradients - Monokai */
+    --gradient-primary: linear-gradient(135deg, hsl(50 100% 60%), hsl(340 82% 65%));
+    --gradient-glow: linear-gradient(135deg, hsl(50 100% 60% / 0.2), hsl(340 82% 65% / 0.2));
+    --gradient-card: linear-gradient(135deg, hsl(70 8% 17%), hsl(70 8% 15%));
+
+    /* Effects - Monokai */
+    --glass-bg: hsl(70 8% 17% / 0.7);
+    --glass-border: hsl(50 100% 60% / 0.1);
+    --glow-primary: 0 0 40px hsl(50 100% 60% / 0.4);
+    --neon-blue: 0 0 20px hsl(50 100% 60%), 0 0 40px hsl(50 100% 60% / 0.5);
+    --neon-purple: 0 0 20px hsl(340 82% 65%), 0 0 40px hsl(340 82% 65% / 0.5);
+  }
+
+  /* ===== THEME: Tokyo Night ===== */
+  .theme-tokyo-night {
+    --background: 235 23% 15%;
+    --foreground: 225 27% 78%;
+    --card: 235 21% 17%;
+    --card-foreground: 225 27% 78%;
+    --popover: 235 21% 19%;
+    --popover-foreground: 225 27% 78%;
+    --primary: 267 83% 70%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 235 21% 20%;
+    --secondary-foreground: 225 27% 78%;
+    --muted: 235 21% 18%;
+    --muted-foreground: 225 15% 50%;
+    --accent: 192 95% 60%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 355 78% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 235 18% 25%;
+    --input: 235 18% 25%;
+    --ring: 267 83% 70%;
+
+    /* Syntax - Tokyo Night */
+    --syntax-keyword: 267 83% 70%;
+    --syntax-string: 152 76% 55%;
+    --syntax-number: 28 100% 68%;
+    --syntax-function: 192 95% 60%;
+    --syntax-comment: 225 15% 45%;
+    --syntax-operator: 267 83% 70%;
+    --syntax-property: 215 82% 65%;
+    --syntax-variable: 225 27% 78%;
+
+    /* Editor UI - Tokyo Night */
+    --editor-bg: 235 23% 15%;
+    --sidebar-bg: 235 23% 12%;
+    --tab-active: 235 23% 15%;
+    --tab-inactive: 235 21% 18%;
+    --line-number: 225 15% 40%;
+    --terminal-bg: 235 23% 10%;
+    --terminal-text: 192 95% 60%;
+
+    /* Gradients - Tokyo Night */
+    --gradient-primary: linear-gradient(135deg, hsl(267 83% 70%), hsl(192 95% 60%));
+    --gradient-glow: linear-gradient(135deg, hsl(267 83% 70% / 0.2), hsl(192 95% 60% / 0.2));
+    --gradient-card: linear-gradient(135deg, hsl(235 21% 17%), hsl(235 23% 15%));
+
+    /* Effects - Tokyo Night */
+    --glass-bg: hsl(235 21% 17% / 0.7);
+    --glass-border: hsl(267 83% 70% / 0.1);
+    --glow-primary: 0 0 40px hsl(267 83% 70% / 0.4);
+    --neon-blue: 0 0 20px hsl(192 95% 60%), 0 0 40px hsl(192 95% 60% / 0.5);
+    --neon-purple: 0 0 20px hsl(267 83% 70%), 0 0 40px hsl(267 83% 70% / 0.5);
+  }
+
+  /* ===== THEME: Dracula ===== */
+  .theme-dracula {
+    --background: 231 15% 18%;
+    --foreground: 60 30% 96%;
+    --card: 231 15% 20%;
+    --card-foreground: 60 30% 96%;
+    --popover: 231 15% 22%;
+    --popover-foreground: 60 30% 96%;
+    --primary: 265 89% 78%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 231 15% 23%;
+    --secondary-foreground: 60 30% 96%;
+    --muted: 231 15% 21%;
+    --muted-foreground: 225 15% 55%;
+    --accent: 135 94% 65%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 100% 67%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 231 12% 28%;
+    --input: 231 12% 28%;
+    --ring: 265 89% 78%;
+
+    /* Syntax - Dracula */
+    --syntax-keyword: 326 100% 74%;
+    --syntax-string: 65 92% 76%;
+    --syntax-number: 265 89% 78%;
+    --syntax-function: 135 94% 65%;
+    --syntax-comment: 225 15% 50%;
+    --syntax-operator: 326 100% 74%;
+    --syntax-property: 191 97% 77%;
+    --syntax-variable: 60 30% 96%;
+
+    /* Editor UI - Dracula */
+    --editor-bg: 231 15% 18%;
+    --sidebar-bg: 231 15% 15%;
+    --tab-active: 231 15% 18%;
+    --tab-inactive: 231 15% 21%;
+    --line-number: 225 15% 40%;
+    --terminal-bg: 231 15% 12%;
+    --terminal-text: 135 94% 65%;
+
+    /* Gradients - Dracula */
+    --gradient-primary: linear-gradient(135deg, hsl(265 89% 78%), hsl(326 100% 74%));
+    --gradient-glow: linear-gradient(135deg, hsl(265 89% 78% / 0.2), hsl(326 100% 74% / 0.2));
+    --gradient-card: linear-gradient(135deg, hsl(231 15% 20%), hsl(231 15% 18%));
+
+    /* Effects - Dracula */
+    --glass-bg: hsl(231 15% 20% / 0.7);
+    --glass-border: hsl(265 89% 78% / 0.1);
+    --glow-primary: 0 0 40px hsl(265 89% 78% / 0.4);
+    --neon-blue: 0 0 20px hsl(191 97% 77%), 0 0 40px hsl(191 97% 77% / 0.5);
+    --neon-purple: 0 0 20px hsl(265 89% 78%), 0 0 40px hsl(265 89% 78% / 0.5);
+  }
+
+  /* ===== THEME: Solarized Dark ===== */
+  .theme-solarized-dark {
+    --background: 192 100% 6%;
+    --foreground: 186 8% 55%;
+    --card: 192 81% 9%;
+    --card-foreground: 186 8% 55%;
+    --popover: 192 81% 11%;
+    --popover-foreground: 186 8% 55%;
+    --primary: 175 59% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 192 81% 12%;
+    --secondary-foreground: 186 8% 55%;
+    --muted: 192 81% 10%;
+    --muted-foreground: 186 6% 45%;
+    --accent: 175 59% 40%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 1 71% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 192 50% 15%;
+    --input: 192 50% 15%;
+    --ring: 175 59% 40%;
+
+    /* Syntax - Solarized */
+    --syntax-keyword: 18 80% 44%;
+    --syntax-string: 175 59% 40%;
+    --syntax-number: 265 60% 60%;
+    --syntax-function: 68 100% 30%;
+    --syntax-comment: 186 6% 40%;
+    --syntax-operator: 186 8% 55%;
+    --syntax-property: 205 69% 49%;
+    --syntax-variable: 45 100% 35%;
+
+    /* Editor UI - Solarized */
+    --editor-bg: 192 100% 6%;
+    --sidebar-bg: 192 100% 5%;
+    --tab-active: 192 100% 6%;
+    --tab-inactive: 192 81% 9%;
+    --line-number: 186 6% 35%;
+    --terminal-bg: 192 100% 4%;
+    --terminal-text: 175 59% 40%;
+
+    /* Gradients - Solarized */
+    --gradient-primary: linear-gradient(135deg, hsl(175 59% 40%), hsl(205 69% 49%));
+    --gradient-glow: linear-gradient(135deg, hsl(175 59% 40% / 0.2), hsl(205 69% 49% / 0.2));
+    --gradient-card: linear-gradient(135deg, hsl(192 81% 9%), hsl(192 100% 6%));
+
+    /* Effects - Solarized */
+    --glass-bg: hsl(192 81% 9% / 0.7);
+    --glass-border: hsl(175 59% 40% / 0.1);
+    --glow-primary: 0 0 40px hsl(175 59% 40% / 0.4);
+    --neon-blue: 0 0 20px hsl(205 69% 49%), 0 0 40px hsl(205 69% 49% / 0.5);
+    --neon-cyan: 0 0 20px hsl(175 59% 40%), 0 0 40px hsl(175 59% 40% / 0.5);
+  }
 }
 
+/* Theme transition styles */
 @layer base {
   * {
     @apply border-border;
   }
-  
+
+  /* Smooth theme transitions */
   html,
-  body {
-    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+  body,
+  .bg-background,
+  .bg-card,
+  .bg-popover,
+  .bg-secondary,
+  .bg-muted,
+  .bg-primary,
+  .bg-accent,
+  .text-foreground,
+  .text-muted-foreground,
+  .text-primary,
+  .text-accent-foreground,
+  .border-border,
+  .glow-card-wrapper,
+  .glow-card-inner {
+    transition:
+      background-color var(--theme-transition) ease,
+      color var(--theme-transition) ease,
+      border-color var(--theme-transition) ease,
+      box-shadow var(--theme-transition) ease;
   }
 
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+  }
 
   /* Blinking cursor animation */
   @keyframes blink {
@@ -157,7 +495,7 @@ All colors MUST be HSL.
 
   /* Smooth transitions */
   .smooth-transition {
-    transition: var(--transition-smooth);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Scrollbar styling */
@@ -229,8 +567,8 @@ All colors MUST be HSL.
   }
 
   .hover-glow:hover {
-    box-shadow: 0 0 30px -8px hsl(207 100% 50% / 0.2);
-    border-color: hsl(207 100% 50% / 0.25);
+    box-shadow: 0 0 30px -8px hsl(var(--primary) / 0.2);
+    border-color: hsl(var(--primary) / 0.25);
   }
 
   /* Glow Effects */
@@ -282,13 +620,13 @@ All colors MUST be HSL.
     padding: 1px;
     border-radius: 0.75rem;
     background: conic-gradient(from var(--gradient-angle, 0deg),
-        hsl(207 100% 50%),
+        hsl(var(--primary)),
         hsl(270 80% 60%),
         hsl(330 80% 60%),
         hsl(30 90% 55%),
         hsl(50 90% 55%),
-        hsl(180 80% 50%),
-        hsl(207 100% 50%));
+        hsl(var(--accent)),
+        hsl(var(--primary)));
     animation: rotate-gradient 4s linear infinite;
   }
 
@@ -440,8 +778,8 @@ All colors MUST be HSL.
   }
 
   .card-glow:hover {
-    box-shadow: 0 0 40px -10px hsl(207 100% 50% / 0.25);
-    border-color: hsl(207 100% 50% / 0.3);
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.25);
+    border-color: hsl(var(--primary) / 0.3);
   }
 
   /* Reduced motion support */

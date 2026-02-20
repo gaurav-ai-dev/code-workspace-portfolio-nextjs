@@ -360,7 +360,7 @@ const THEME_STORAGE_KEY = 'portfolio-theme';
 // Get initial theme before React mounts to prevent flash
 const getInitialTheme = (): ThemeId => {
   if (typeof window === 'undefined') return 'dark-plus';
-  
+
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
     if (stored && themes.find(t => t.id === stored)) {
@@ -369,7 +369,7 @@ const getInitialTheme = (): ThemeId => {
   } catch (e) {
     // localStorage might be unavailable
   }
-  
+
   return 'dark-plus';
 };
 
@@ -377,16 +377,16 @@ const getInitialTheme = (): ThemeId => {
 const applyThemeToDocument = (themeId: ThemeId) => {
   const root = document.documentElement;
   const variables = themeVariables[themeId];
-  
+
   if (variables) {
     Object.entries(variables).forEach(([property, value]) => {
       root.style.setProperty(property, value);
     });
   }
-  
+
   // Update data attribute for potential CSS selectors
   root.setAttribute('data-theme', themeId);
-  
+
   // Add class for potential additional styling
   themes.forEach(t => root.classList.remove(`theme-${t.id}`));
   root.classList.add(`theme-${themeId}`);
@@ -405,7 +405,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const setTheme = useCallback((themeId: ThemeId) => {
     setCurrentTheme(themeId);
     applyThemeToDocument(themeId);
-    
+
     try {
       localStorage.setItem(THEME_STORAGE_KEY, themeId);
     } catch (e) {
@@ -424,7 +424,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         e.preventDefault();
         toggleThemeSelector();
       }
-      
+
       // Escape to close
       if (e.key === 'Escape' && isThemeSelectorOpen) {
         closeThemeSelector();

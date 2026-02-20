@@ -6,9 +6,11 @@ import { Sidebar } from "@/components/Sidebar";
 import { TabBar } from "@/components/TabBar";
 import { Terminal } from "@/components/Terminal";
 import { Code2, Maximize2, Menu } from "lucide-react";
+import { ThemeToggleButton } from "./ThemeSelector";
 
 export function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
 
   // ✅ map route -> active file
   const activeFile = useMemo(() => {
@@ -52,9 +54,15 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
           <Code2 className="w-5 h-5 text-primary" />
           <span className="font-semibold text-sm sm:text-base">gaurav.ai</span>
         </div>
+
         <div className="flex items-center gap-4 text-xs sm:text-sm text-white">
-          <span className="hidden sm:inline">Gaurav Garg</span>
-          <Maximize2 className="w-4 h-4" />
+          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-foreground">
+            {/* Theme Toggle Button */}
+            <ThemeToggleButton />
+            {/* <span className="hidden sm:inline text-muted-foreground">Gaurav Garg</span> */}
+            {/* <Maximize2 className="w-4 h-4" /> */}
+          </div>
+          {/* <Maximize2 className="w-4 h-4" /> */}
         </div>
       </div>
 
