@@ -392,11 +392,7 @@ const applyThemeToDocument = (themeId: ThemeId) => {
   root.classList.add(`theme-${themeId}`);
 };
 
-// Initialize theme immediately to prevent flash
-if (typeof window !== 'undefined') {
-  const initialTheme = getInitialTheme();
-  applyThemeToDocument(initialTheme);
-}
+// Note: Theme is applied inside ThemeProvider's useEffect to avoid SSR/hydration mismatches.
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState<ThemeId>(getInitialTheme);
