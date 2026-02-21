@@ -12,14 +12,15 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
 
-  // ✅ map route -> active file
+  // map route → active file (must match tab names in TabBar exactly)
   const activeFile = useMemo(() => {
-    if (pathname === "/") return "home.js";
-    if (pathname.startsWith("/about")) return "about.js";
-    if (pathname.startsWith("/projects")) return "projects.js";
+    if (pathname === "/" || pathname.startsWith("/about")) return "about.js";
+    if (pathname.startsWith("/skills")) return "skills.js";
+    if (pathname.startsWith("/work")) return "work.js";
     if (pathname.startsWith("/experience")) return "experience.js";
+    if (pathname.startsWith("/blog")) return "blog.js";
     if (pathname.startsWith("/contact")) return "contact.js";
-    return "home.js";
+    return "about.js";
   }, [pathname]);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,14 +56,9 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
           <span className="font-semibold text-sm sm:text-base">gaurav.ai</span>
         </div>
 
-        <div className="flex items-center gap-4 text-xs sm:text-sm text-white">
-          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-foreground">
-            {/* Theme Toggle Button */}
-            <ThemeToggleButton />
-            {/* <span className="hidden sm:inline text-muted-foreground">Gaurav Garg</span> */}
-            {/* <Maximize2 className="w-4 h-4" /> */}
-          </div>
-          {/* <Maximize2 className="w-4 h-4" /> */}
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-foreground">
+          {/* Theme Toggle Button */}
+          <ThemeToggleButton />
         </div>
       </div>
 

@@ -34,13 +34,12 @@ const ThemeOption = ({
     <motion.button
       onClick={onSelect}
       onMouseEnter={onHover}
-      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-md transition-colors duration-150 ${
-        isActive
-          ? 'bg-primary/20 text-primary'
-          : isHovered
+      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-md transition-colors duration-150 ${isActive
+        ? 'bg-primary/20 text-primary'
+        : isHovered
           ? 'bg-muted/80'
           : 'hover:bg-muted/50'
-      }`}
+        }`}
       whileHover={{ x: 2 }}
       whileTap={{ scale: 0.98 }}
     >
@@ -112,13 +111,13 @@ export const ThemeSelector = () => {
           {/* Command Palette Style Modal - positioned at top like VS Code */}
           <motion.div
             ref={containerRef}
-            initial={{ opacity: 0, y: -20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            initial={{ opacity: 0, y: -20, scale: 0.98, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
+            exit={{ opacity: 0, y: -20, scale: 0.98, x: "-50%" }}
             transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-            className="fixed top-[15%] left-1/2 -translate-x-1/2 z-[101] w-[90vw] max-w-lg"
+            className="fixed top-4 sm:top-[15%] left-1/2 z-[101] w-[90vw] max-w-lg max-h-[90dvh] overflow-y-auto rounded-lg"
           >
-            <div 
+            <div
               className="rounded-lg shadow-2xl overflow-hidden border"
               style={{
                 backgroundColor: 'hsl(var(--popover))',
@@ -126,7 +125,7 @@ export const ThemeSelector = () => {
               }}
             >
               {/* Header */}
-              <div 
+              <div
                 className="flex items-center justify-between px-4 py-3 border-b"
                 style={{
                   backgroundColor: 'hsl(var(--secondary) / 0.5)',
@@ -140,7 +139,7 @@ export const ThemeSelector = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span 
+                  <span
                     className="text-xs hidden sm:inline"
                     style={{ color: 'hsl(var(--muted-foreground))' }}
                   >
@@ -157,7 +156,7 @@ export const ThemeSelector = () => {
               </div>
 
               {/* Theme List */}
-              <div className="p-2 max-h-[50vh] overflow-y-auto">
+              <div className="p-2 max-h-[55vh] overflow-y-auto">
                 {themes.map((theme) => (
                   <ThemeOption
                     key={theme.id}
@@ -171,14 +170,14 @@ export const ThemeSelector = () => {
               </div>
 
               {/* Footer hint */}
-              <div 
+              <div
                 className="px-4 py-2.5 border-t text-center"
                 style={{
                   backgroundColor: 'hsl(var(--secondary) / 0.3)',
                   borderColor: 'hsl(var(--border))',
                 }}
               >
-                <p 
+                <p
                   className="text-xs"
                   style={{ color: 'hsl(var(--muted-foreground))' }}
                 >
@@ -208,7 +207,7 @@ export const ThemeToggleButton = () => {
       title="Change Color Theme (Ctrl+Shift+T)"
     >
       <Palette className="w-4 h-4" style={{ color: 'hsl(var(--muted-foreground))' }} />
-      <span 
+      <span
         className="text-xs hidden sm:inline"
         style={{ color: 'hsl(var(--muted-foreground))' }}
       >

@@ -1,10 +1,11 @@
 "use client"
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { TextAnimationFlippingWords } from "./aceternity/text-animation-flipping-words";
 import { Github, Linkedin, Mail, MapPin, Briefcase, Code2, Users, Instagram } from "lucide-react";
 
 
@@ -20,9 +21,17 @@ export const AboutPreview = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
   const [counts, setCounts] = useState({ years: 0, projects: 0, clients: 0, repos: 0 });
 
+  // Preload all avatar images on mount so swaps are instant
+  useEffect(() => {
+    avatarImages.forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
+    });
+  }, []);
+
   useEffect(() => {
     const id = setInterval(() => {
-      setAvatarIndex((prev) => (prev + 1) % avatarImages.length);
+      setAvatarIndex((prev: number) => (prev + 1) % avatarImages.length);
     }, 3000);
 
     return () => clearInterval(id);
@@ -109,22 +118,23 @@ export const AboutPreview = () => {
                   <div className="absolute inset-0 -m-1.5 rounded-full bg-gradient-to-r from-primary/40 via-purple-500/30 to-cyan-500/40 blur-md opacity-60" />
 
                   <Avatar className="w-32 h-32 sm:w-40 sm:h-40 ring-2 ring-primary/20 ring-offset-4 ring-offset-background relative z-10 overflow-hidden">
-                    <motion.img
-                      key={avatarImages[avatarIndex]} // important for animation on change
-                      src={avatarImages[avatarIndex]}
-                      // alt="Profile"
-                      className="w-full h-full object-cover"
-                      // initial={{ opacity: 0 }}
-                      // animate={{ opacity: 1 }}
-                      // exit={{ opacity: 0 }}
-                      // transition={{ duration: 0.5, ease: "easeOut" }}
-                    />
-
+                    <AnimatePresence mode="sync">
+                      <motion.img
+                        key={avatarImages[avatarIndex]}
+                        src={avatarImages[avatarIndex]}
+                        alt="Profile"
+                        className="w-full h-full object-cover absolute inset-0"
+                        initial={{ opacity: 0, scale: 1.08, filter: "blur(6px)" }}
+                        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                        exit={{ opacity: 0, scale: 0.94, filter: "blur(6px)" }}
+                        transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+                      />
+                    </AnimatePresence>
                   </Avatar>
 
                 </motion.div>
 
-                <div className="flex-1 text-center md:text-left space-y-5">
+                <div className="flex-1 min-w-0 text-center md:text-left space-y-5">
                   <div>
                     <motion.h1
                       className="text-4xl sm:text-5xl font-bold mb-3"
@@ -136,14 +146,34 @@ export const AboutPreview = () => {
                         Gaurav Garg
                       </span>
                     </motion.h1>
-                    <motion.p
+                    <motion.div
                       className="text-xl text-white mb-2"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.4, duration: 0.6 }}
                     >
-                      Full Stack & AI Developer
-                    </motion.p>
+                      <span className="font-medium">Full Stack &amp; AI Developer</span>
+                      <span className="opacity-40 hidden sm:inline"> — </span>
+                      {/* block on mobile (width-constrained → chars wrap), inline on desktop (merged) */}
+                      <span className="block sm:inline">
+                        <TextAnimationFlippingWords
+                          words={[
+                            "Building MERN + Next.js apps",
+                            "Integrating GenAI into products",
+                            "Automating workflows & systems",
+                            "Shipping fast, scalable solutions",
+                          ]}
+                          className="text-primary/90"
+                          typingSpeed={48}
+                          deletingSpeed={26}
+                          pauseBeforeDelete={700}
+                          pauseBetweenWords={220}
+                        />
+                      </span>
+                    </motion.div>
+
+
+
                     <motion.p
                       className="text-sm text-white flex items-center justify-center md:justify-start gap-2"
                       initial={{ opacity: 0 }}
