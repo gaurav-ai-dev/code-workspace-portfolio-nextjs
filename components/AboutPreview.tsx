@@ -153,23 +153,20 @@ export const AboutPreview = () => {
                       transition={{ delay: 0.4, duration: 0.6 }}
                     >
                       <span className="font-medium">Full Stack &amp; AI Developer</span>
-                      <span className="opacity-40 hidden sm:inline"> — </span>
-                      {/* block on mobile (width-constrained → chars wrap), inline on desktop (merged) */}
-                      <span className="block sm:inline">
-                        <TextAnimationFlippingWords
-                          words={[
-                            "Building MERN + Next.js apps",
-                            "Integrating GenAI into products",
-                            "Automating workflows & systems",
-                            "Shipping fast, scalable solutions",
-                          ]}
-                          className="text-primary/90"
-                          typingSpeed={48}
-                          deletingSpeed={26}
-                          pauseBeforeDelete={700}
-                          pauseBetweenWords={220}
-                        />
-                      </span>
+                      <span className="opacity-40"> — </span>
+                      <TextAnimationFlippingWords
+                        words={[
+                          "Building MERN + Next.js apps",
+                          "Integrating GenAI into products",
+                          "Automating workflows & systems",
+                          "Shipping fast, scalable solutions",
+                        ]}
+                        className="text-primary/90"
+                        typingSpeed={48}
+                        deletingSpeed={26}
+                        pauseBeforeDelete={700}
+                        pauseBetweenWords={220}
+                      />
                     </motion.div>
 
 
